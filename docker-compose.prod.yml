@@ -1,0 +1,115 @@
+version: "3"
+
+services:
+
+  hr-config-server:
+    container_name: hr-config-server
+    environment:
+      APP_PROFILE: "prod"
+      GITHUB_USER: "daniacaz"
+      GITHUB_PASS: "59f12a11fbc493642960fa433032537640586361"
+      GITHUB_URI: "https://daniel-acaz@github.com/daniel-acaz/microservices-proj-config.git"
+      GITHUB_PASSPHRASE: "git-key-dacaz"
+    build:
+      context: ./hr-config-server
+      dockerfile: Dockerfile
+    ports:
+    - "8888:8888"
+    networks:
+      - hr-net
+
+  hr-eureka-server:
+    container_name: hr-eureka-server
+    environment:
+      APP_PROFILE: "prod"
+    build:
+      context: ./hr-eureka-server
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    depends_on:
+      - hr-config-server
+    networks:
+      - hr-net
+
+  hr-zuul-api:
+    container_name: hr-zuul-api
+    environment:
+      APP_PROFILE: "prod"
+    build:
+      context: ./hr-zuul-api
+      dockerfile: Dockerfile
+    ports:
+      - "8765:8765"
+    depends_on:
+      - hr-config-server
+      - hr-eureka-server
+    networks:
+      - hr-net
+
+  hr-auth:
+    container_name: hr-auth
+    environment:
+      APP_PROFILE: "prod"
+    build:
+      context: ./hr-auth
+      dockerfile: Dockerfile
+    depends_on:
+      - hr-config-server
+      - hr-eureka-server
+    networks:
+      - hr-net
+
+  hr-user:
+    container_name: hr-user
+    environment:
+      APP_PROFILE: "prod"
+    build:
+      context: ./hr-user
+      dockerfile: Dockerfile
+    depends_on:
+      - hr-config-server
+      - hr-eureka-server
+    networks:
+      - hr-net
+
+  hr-payroll:
+    container_name: hr-payroll
+    environment:
+      APP_PROFILE: "prod"
+    build:
+      context: ./hr-payroll
+      dockerfile: Dockerfile
+    depends_on:
+      - hr-config-server
+      - hr-eureka-server
+    networks:
+      - hr-net
+
+  hr-worker:
+    container_name: hr-worker
+    environment:
+      APP_PROFILE: "prod"
+    build:
+      context: ./hr-worker
+      dockerfile: Dockerfile
+    depends_on:
+      - hr-config-server
+      - hr-eureka-server
+    networks:
+      - hr-net
+
+
+
+  hr-worker-pg12:
+    networks:
+      - hr-net
+
+  hr-user-pg12:
+    networks:
+      - hr-net
+
+
+networks:
+  hr-net:
+    driver: bridge

@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: "hr-config-server"
+  cloud:
+    config:
+      server:
+        git:
+          default-label: "main"
+          uri: ${GITHUB_URI}
+          passphrase: ${GITHUB_PASSPHRASE}
+          skip-ssl-validation: true
+          clone-on-start: true
+          username: ${GITHUB_USER}
+          password: ${GITHUB_PASS}
+server:
+  port: 8888

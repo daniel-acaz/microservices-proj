@@ -1,0 +1,32 @@
+server:
+  port: 8765
+spring:
+  application:
+    name: "hr-zuul-api"
+
+zuul:
+  routes:
+    hr-worker:
+      service-id: "hr-worker"
+      path: "/hr-worker/**"
+    hr-payroll:
+      service-id: "hr-payroll"
+      path: "/hr-payroll/**"
+    hr-user:
+      service-id: "hr-user"
+      path: "/hr-user/**"
+    hr-auth:
+      service-id: "hr-auth"
+      path: "/hr-auth/**"
+      sensitive-headers: "Cookie,Set-Cookie"
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 20000

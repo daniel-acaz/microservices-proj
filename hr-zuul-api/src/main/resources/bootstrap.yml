@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: "hr-zuul-api"
+  profiles:
+    active: "${APP_PROFILE:dev}"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

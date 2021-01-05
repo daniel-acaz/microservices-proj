@@ -1,0 +1,18 @@
+server:
+  port: 8101
+spring:
+  application:
+      name: "hr-payroll"
+  profiles:
+    active: "${APP_PROFILE:dev}"
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
+ribbon:
+  ConnectTimeout: 10000
+  ReadTimeout: 20000

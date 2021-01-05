@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: "hr-worker"
+  cloud:
+  profiles:
+    active: "${APP_PROFILE:dev}"
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
