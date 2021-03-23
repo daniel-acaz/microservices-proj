@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: "hr-config-server"
   cloud:
     config:
       server:
@@ -12,5 +10,7 @@ spring:
           clone-on-start: true
           username: ${GITHUB_USER}
           password: ${GITHUB_PASS}
+  application:
+    name: "hr-config-server"
 server:
   port: 8888

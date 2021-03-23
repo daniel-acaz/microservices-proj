@@ -6,8 +6,8 @@ services:
     container_name: hr-config-server
     environment:
       APP_PROFILE: "prod"
-      GITHUB_USER: "daniacaz"
-      GITHUB_PASS: "59f12a11fbc493642960fa433032537640586361"
+      GITHUB_USER: "daniel-acaz"
+      GITHUB_PASS: "643edaee67b343557e230a00a217d5d3a002c241"
       GITHUB_URI: "https://daniel-acaz@github.com/daniel-acaz/microservices-proj-config.git"
       GITHUB_PASSPHRASE: "git-key-dacaz"
     build:
@@ -41,9 +41,13 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8765:8765"
+    restart: on-failure
     depends_on:
       - hr-config-server
       - hr-eureka-server
+      - hr-user
+      - hr-payroll
+      - hr-worker
     networks:
       - hr-net
 
@@ -54,9 +58,11 @@ services:
     build:
       context: ./hr-auth
       dockerfile: Dockerfile
+    restart: on-failure
     depends_on:
       - hr-config-server
       - hr-eureka-server
+      - hr-zuul-api
     networks:
       - hr-net
 
