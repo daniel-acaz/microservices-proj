@@ -7,7 +7,7 @@ services:
     environment:
       APP_PROFILE: "prod"
       GITHUB_USER: "daniel-acaz"
-      GITHUB_PASS: "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"
+      GITHUB_PASS: "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"
       GITHUB_URI: "https://daniel-acaz@github.com/daniel-acaz/microservices-proj-config.git"
       GITHUB_PASSPHRASE: "rsa-key"
     build:
@@ -73,6 +73,7 @@ services:
     build:
       context: ./hr-user
       dockerfile: Dockerfile
+    restart: on-failure
     depends_on:
       - hr-config-server
       - hr-eureka-server
