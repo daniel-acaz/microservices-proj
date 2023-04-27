@@ -4,11 +4,11 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
-RUN ./mvnw package -DskipTests
+RUN ./mvnw -f pom.xml clean package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM openjdk:11
 VOLUME /tmp
 EXPOSE 8761
-ADD ./target/hr-eureka-server-0.0.1-SNAPSHOT.jar hr-eureka-server.jar
-ENTRYPOINT ["java","-jar","/hr-eureka-server.jar"]
+COPY --from=build /app/target/hr-eureka-server.jar /usr/local/lib/hr-eureka-server.jar
+ENTRYPOINT ["java","-jar","/usr/local/lib/hr-eureka-server.jar"]

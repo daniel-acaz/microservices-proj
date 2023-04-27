@@ -4,10 +4,10 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
-RUN ./mvnw package -DskipTests
+RUN ./mvnw -f pom.xml clean package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM openjdk:11
 VOLUME /tmp
-ADD ./target/hr-payroll-0.0.1-SNAPSHOT.jar hr-payroll.jar
-ENTRYPOINT ["java","-jar","/hr-payroll.jar"]
+COPY --from=build /app/target/hr-payroll.jar /usr/local/lib/hr-payroll.jar
+ENTRYPOINT ["java","-jar","/usr/local/lib/hr-payroll.jar"]

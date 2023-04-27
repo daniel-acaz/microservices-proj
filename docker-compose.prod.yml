@@ -7,9 +7,9 @@ services:
     environment:
       APP_PROFILE: "prod"
       GITHUB_USER: "daniel-acaz"
-      GITHUB_PASS: "643edaee67b343557e230a00a217d5d3a002c241"
+      GITHUB_PASS: "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"
       GITHUB_URI: "https://daniel-acaz@github.com/daniel-acaz/microservices-proj-config.git"
-      GITHUB_PASSPHRASE: "git-key-dacaz"
+      GITHUB_PASSPHRASE: "rsa-key"
     build:
       context: ./hr-config-server
       dockerfile: Dockerfile

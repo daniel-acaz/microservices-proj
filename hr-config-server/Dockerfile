@@ -4,11 +4,11 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
-RUN ./mvnw package -DskipTests
+RUN ./mvnw -f pom.xml clean package -DskipTests
 RUN mkdir -p target/dependency && (cd target/dependency; jar -xf ../*.jar)
 
 FROM openjdk:11
 VOLUME /tmp
 EXPOSE 8888
-ADD ./target/hr-config-server-0.0.1-SNAPSHOT.jar hr-config-server.jar
-ENTRYPOINT ["java","-jar","/hr-config-server.jar"]
+COPY --from=build /app/target/hr-config-server.jar /usr/local/lib/hr-config-server.jar
+ENTRYPOINT ["java","-jar","/usr/local/lib/hr-config-server.jar"]
