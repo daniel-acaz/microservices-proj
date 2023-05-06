@@ -7,7 +7,7 @@ services:
     environment:
       APP_PROFILE: "prod"
       GITHUB_USER: "daniel-acaz"
-      GITHUB_PASS: "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"
+      GITHUB_PASS: "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"
       GITHUB_URI: "https://daniel-acaz@github.com/daniel-acaz/microservices-proj-config.git"
       GITHUB_PASSPHRASE: "rsa-key"
     build:
