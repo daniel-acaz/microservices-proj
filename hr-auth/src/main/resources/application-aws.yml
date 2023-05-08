@@ -1,0 +1,4 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: "${AWS_EUREKA_SERVER_PATH}"
