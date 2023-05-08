@@ -1,4 +1,4 @@
 spring:
   cloud:
     config:
-      uri: "http://ec2-54-152-42-7.compute-1.amazonaws.com:8888"
+      uri: "${AWS_CONFIG_SERVER_PATH}"

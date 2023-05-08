@@ -1,4 +1,4 @@
 eureka:
   client:
     service-url:
-      defaultZone: "http://ec2-18-233-168-192.compute-1.amazonaws.com:8761/eureka"
+      defaultZone: "${AWS_EUREKA_SERVER_PATH}"
