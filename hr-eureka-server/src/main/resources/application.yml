@@ -8,3 +8,7 @@ eureka:
   client:
     register-with-eureka: false
     fetch-registry: false
+
+logging:
+  file:
+    name: ${LOG_PATH}/logs/eureka-server.log
