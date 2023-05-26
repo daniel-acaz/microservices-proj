@@ -14,3 +14,7 @@ spring:
     name: "hr-config-server"
 server:
   port: 8888
+
+logging:
+  file:
+    name: ${LOG_PATH}/logs/config-server.log
