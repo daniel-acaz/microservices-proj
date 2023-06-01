@@ -6,3 +6,7 @@ spring:
 eureka:
   instance:
     instance-id: "${spring.application.name}:${spring.application.instance_id:${random.value}}"
+
+logging:
+  file:
+    name: ${LOG_PATH}/logs/user.log

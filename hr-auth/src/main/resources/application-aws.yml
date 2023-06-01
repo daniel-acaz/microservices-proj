@@ -2,3 +2,7 @@ eureka:
   client:
     service-url:
       defaultZone: "${AWS_EUREKA_SERVER_PATH}"
+
+logging:
+  file:
+    name: ${LOG_PATH}/logs/auth-server.log
